@@ -2,7 +2,9 @@ var submitBtn = $("#submit");
 var movieNameInput = $("#movie-name-input");
 var movieImage = $("#movie-image");
 
-loadMovie("tt0099700");
+var movies = ["tt0099700", "tt0133093"];
+
+loadMovie(movies[generateIndex()]);
 
 function loadMovie(movieID) {
   fetch(`http://www.omdbapi.com/?i=${movieID}&apikey=efb9b6cf`)
@@ -11,6 +13,10 @@ function loadMovie(movieID) {
       console.log(data);
       movieImage.attr("src", data.Poster);
     });
+}
+
+function generateIndex() {
+  return Math.floor(Math.random() * movies.length);
 }
 
 submitBtn.click(function () {});
