@@ -4,18 +4,37 @@ var movieImage = $("#movie-image");
 var score = 0;
 var rottenTomatoesScore;
 
-var movies = ["tt0099700", "tt0133093", "tt0090142", "tt0120587"];
+var movies = [
+  "tt0099700",
+  "tt0133093",
+  "tt0090142",
+  "tt0120587",
+  "tt0796366",
+  "tt0126029",
+  "tt0314331",
+  "tt1853728",
+  "tt0241527",
+  "tt4154796",
+  "tt0120338",
+  "tt1630029",
+  "tt0281358",
+  "tt4468740",
+];
 
-loadMovie(movies[generateIndex()]);
+var index = generateIndex();
+loadMovie(movies[index]);
 
 function loadMovie(movieID) {
+  if (movies.length === 0) {
+    return;
+  }
+
   fetch(`http://www.omdbapi.com/?i=${movieID}&apikey=efb9b6cf`)
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
       movieImage.attr("src", data.Poster);
       rottenTomatoesScore = parseInt(data.Ratings[1].Value);
-      console.log(`RT score: ${rottenTomatoesScore}`);
     });
 }
 
@@ -25,7 +44,6 @@ function generateIndex() {
 
 submitBtn.click(function () {
   var guess = guessInput.val();
-  console.log(`Guess: ${guess}`);
   var validGuess = checkGuess(guess);
 
   if (!validGuess) {
@@ -33,15 +51,29 @@ submitBtn.click(function () {
     return;
   }
 
+  console.log(`Guess: ${guess}`);
+  console.log(`RT score: ${rottenTomatoesScore}`);
+
   var difference = rottenTomatoesScore - guess;
   console.log(`Difference: ${difference}`);
+
   var pointsAwarded = 100 - difference;
   console.log(`Points awarded: ${pointsAwarded}`);
+
   score += pointsAwarded;
   console.log(`Score: ${score}`);
-  loadMovie(movies[generateIndex()]);
+
+  movies.splice(index, 1);
+
+  index = generateIndex();
+  loadMovie(movies[index]);
+  guessInput.val("");
 });
 
 function checkGuess(guess) {
-  return true;
+  if ($.isNumeric(guess) && guess >= 0 && guess <= 100) {
+    return true;
+  } else {
+    return false;
+  }
 }
