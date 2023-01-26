@@ -18,6 +18,7 @@ var movies = [
   "tt0120338",
   "tt1630029",
   "tt0281358",
+  "tt4468740",
 ];
 
 var index = generateIndex();
@@ -66,8 +67,13 @@ submitBtn.click(function () {
 
   index = generateIndex();
   loadMovie(movies[index]);
+  guessInput.val("");
 });
 
 function checkGuess(guess) {
-  return true;
+  if ($.isNumeric(guess) && guess >= 0 && guess <= 100) {
+    return true;
+  } else {
+    return false;
+  }
 }
