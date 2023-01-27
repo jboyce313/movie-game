@@ -29,6 +29,24 @@ var movies = [
   "tt0093748", // plains, trains, and automobiles
   "tt0441773", // kung fu panda
   "tt0240468", // kun pow: enter the fist
+  "tt6710474", // everything everywhere all at once
+  "tt0800369", // thor
+  "tt4633694", // into the spider-verse
+  "tt0086250", // scarface
+  "tt0114898", // waterworld
+  "tt0120812", // rush hour
+  "tt0117705", // space jam
+  "tt0107120", // hocus pocus
+  "tt0102057", // hook
+  "tt1270797", // venom
+  "tt0787475", // hot rod
+  "tt1485796", // the greatest showman
+  "tt0096542", // baywatch
+  "tt0388419", // christmas with the kranks
+  "tt0454945", // she's the man
+  "tt0113497", // jumanji
+  "tt0120616", // the mummy
+  "tt0247638", // the princess diaries
 ];
 
 var index = generateIndex();
