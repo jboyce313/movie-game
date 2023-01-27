@@ -57,6 +57,7 @@ submitBtn.click(function () {
   var validGuess = checkGuess(guess);
 
   if (!validGuess) {
+    // change to modal
     alert("invalid guess");
     return;
   }
