@@ -1,0 +1,44 @@
+
+#mainScreen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+
+  }
+
+body {
+    background-image: url("../Background_image.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: black;
+  }
+
+h1 {
+    color:white;
+    font-family:'Margarine', cursive;
+}
+.position-absolute {
+  display:flex;
+  position: absolute;
+  top: 87%;
+  left: 50%;
+  transform: translate(-70%,-50%);
+}
+.position-absolute2 {
+    display:flex;
+    position: absolute;
+    top: 87%;
+    left: 50%;
+    transform: translate(150%,-50%);
+  }
+
+#jonButton, #casenButton {
+    box-shadow: black 2px 2px, white 4px 4px, white 6px 6px, white 8px 8px, black 10px 10px;
+    background-color: rgb(33, 32, 32)
+}
+
+#kippButton, #jacobButton {
+    box-shadow: black -2px 2px, white -4px 4px, white -6px 6px, white -8px 8px, black -10px 10px;
+    background-color: rgb(33, 32, 32)
+}
