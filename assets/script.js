@@ -48,6 +48,8 @@ var movies = [
   "tt0113497", // jumanji
   "tt0120616", // the mummy
   "tt0247638", // the princess diaries
+  "tt0243655", // wet hot american summer
+  "tt0120591", // armageddon
 ];
 
 var index = generateIndex();
