@@ -87,3 +87,7 @@ function checkGuess(guess) {
     return false;
   }
 }
+
+function startGame() {
+  window.location.href = "./score-guesser.html";
+}
