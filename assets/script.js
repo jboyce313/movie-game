@@ -88,3 +88,6 @@ function checkGuess(guess) {
   }
 }
 
+function startGame() {
+  window.location.href = "./score-guesser.html";
+}
