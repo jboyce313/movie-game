@@ -88,7 +88,18 @@ function checkGuess(guess) {
     return false;
   }
 }
-
+function kippsButton() {
+  window.open("https://github.com/kcavner", "_blank");
+}
+function jonsButton() {
+  window.open("https://github.com/jonathanguhl", "_blank");
+}
+function casensButton() {
+  window.open("https://github.com/casensutherland", "_blank");
+}
+function jacobsButton() {
+  window.open("https://github.com/jboyce313", "_blank");
+}
 function startGame() {
   window.location.href = "./score-guesser.html";
 }
