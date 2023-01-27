@@ -86,4 +86,5 @@ function checkGuess(guess) {
   } else {
     return false;
   }
+}
 
