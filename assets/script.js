@@ -4,6 +4,7 @@ var movieImage = $("#movie-image");
 var score = 0;
 var rottenTomatoesScore;
 
+
 var movies = [
   "tt0099700",
   "tt0133093",
@@ -34,6 +35,8 @@ var movies = [
 var index = generateIndex();
 loadMovie(movies[index]);
 
+
+
 function loadMovie(movieID) {
   if (movies.length === 0) {
     return;
@@ -45,6 +48,10 @@ function loadMovie(movieID) {
       console.log(data);
       movieImage.attr("src", data.Poster);
       rottenTomatoesScore = parseInt(data.Ratings[1].Value);
+      var dataTitle = data.Title.replace(/ /g, "%20")
+      console.log(dataTitle)
+      call(dataTitle)
+    
     });
 }
 
@@ -88,3 +95,16 @@ function checkGuess(guess) {
     return false;
   }
 }
+
+function call(dataTitle){$.ajax({
+  url: "https://en.wikipedia.org/w/api.php?action=opensearch&search="+dataTitle+ "&limit=10&namespace=0&format=json&origin=*",
+  success: function(result) {
+     var wikiData = result
+    console.log(wikiData)
+    console.log(dataTitle)
+
+  
+
+
+  }})}
+
