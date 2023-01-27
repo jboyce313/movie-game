@@ -4,5 +4,59 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Margarine&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/style.css" />
     <title>Movie Game</title>
+  </head>
+    <body>
+        <div class="columns is-vcentered">
+            <div class="column">
+              <div id="mainScreen" class="has-text-centered">
+                <div id="cardLookalike" class="is-flex" style="flex-direction:column;">
+                    <figure class="image is-rounded center">
+                      <img src="RT_logo.png" class="is-rounded is size-1 is-128px-128px"></img>
+                      <h1 class="is-size-1 position-absolute">Review Guesser</h1>
+                      <button id="startGame" class="button is-success is-rounded is-outlined is-medium position-absolute2" onclick="startGame()">Start</button>
+                    </figure> 
+                  </div>
+              </div>
+            </div>
+          </div>
+        <div class="columns is-vcentered" >
+            <div class="column">
+                <div id="shoutOuts" class="has-text-centered">
+                    <a href="#" id="casenButton" class="button is-rounded is-outlined is-success m-2" onclick="casensButton()">
+                        <span class="icon">
+                        <i class="fab fa-github"></i>
+                        </span>
+                        <span>CSutherland</span> 
+                    </a>
+                    <a href="#" id="jonButton" class="button is-rounded is-outlined is-success m-2" onclick="jonsButton()">
+                        <span class="icon">
+                        <i class="fab fa-github"></i>
+                        </span>
+                        <span>JonGuhl</span>
+                    </a>
+                    <a href="#" id="kippButton" class="button is-rounded is-outlined is-success m-2" onclick="kippsButton()">
+                        <span class="icon">
+                        <i class="fab fa-github"></i>
+                        </span>
+                        <span>KCavner</span>
+                    </a>
+                    <a href="#" id="jacobButton" class="button is-rounded is-outlined is-success m-2" onclick="jacobsButton()">
+                        <span class="icon">
+                        <i class="fab fa-github"></i>
+                        </span>
+                        <span>Jboyce313</span>
+                    </a>
+                </div> 
+            </div>            
+        </div>  
+        <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script> 
+        <script src="./assets/script.js"></script>             
+     </body>
+     </html>

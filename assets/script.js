@@ -6,30 +6,48 @@ var rottenTomatoesScore;
 
 
 var movies = [
-  "tt0099700",
-  "tt0133093",
-  "tt0090142",
-  "tt0120587",
-  "tt0796366",
-  "tt0126029",
-  "tt0314331",
-  "tt1853728",
-  "tt0241527",
-  "tt4154796",
-  "tt0120338",
-  "tt1630029",
-  "tt0281358",
-  "tt4468740",
-  "tt0089218",
-  "tt0075314",
-  "tt0170016",
-  "tt0110912",
-  "tt1375666",
-  "tt0368891",
-  "tt0808510",
-  "tt0093748",
-  "tt0441773",
-  "tt0240468",
+  "tt0099700", // gremlins 2
+  "tt0133093", // the matrix
+  "tt0090142", // teen wolf
+  "tt0120587", // antz
+  "tt0796366", // star trek (2009)
+  "tt0126029", // shrek
+  "tt0314331", // love actually
+  "tt1853728", // django unchained
+  "tt0241527", // harry potter 1
+  "tt4154796", // avengers endgame
+  "tt0120338", // titanic
+  "tt1630029", // avatar: the way of water
+  "tt0281358", // a walk to remember
+  "tt4468740", // paddington 2
+  "tt0089218", // the goonies
+  "tt0075314", // taxi driver
+  "tt0170016", // how the grinch stole christmas
+  "tt0110912", // pulp fiction
+  "tt1375666", // inception
+  "tt0368891", // national treasure
+  "tt0808510", // tooth fairy
+  "tt0093748", // plains, trains, and automobiles
+  "tt0441773", // kung fu panda
+  "tt0240468", // kun pow: enter the fist
+  "tt6710474", // everything everywhere all at once
+  "tt0800369", // thor
+  "tt4633694", // into the spider-verse
+  "tt0086250", // scarface
+  "tt0114898", // waterworld
+  "tt0120812", // rush hour
+  "tt0117705", // space jam
+  "tt0107120", // hocus pocus
+  "tt0102057", // hook
+  "tt1270797", // venom
+  "tt0787475", // hot rod
+  "tt1485796", // the greatest showman
+  "tt0096542", // baywatch
+  "tt0388419", // christmas with the kranks
+  "tt0454945", // she's the man
+  "tt0113497", // jumanji
+  "tt0120616", // the mummy
+  "tt0247638", // the princess diaries
 ];
 
 var index = generateIndex();
@@ -96,6 +114,7 @@ function checkGuess(guess) {
   }
 }
 
+
 function call(dataTitle){$.ajax({
   url: "https://en.wikipedia.org/w/api.php?action=opensearch&search="+dataTitle+ "&limit=10&namespace=0&format=json&origin=*",
   success: function(result) {
@@ -107,4 +126,21 @@ function call(dataTitle){$.ajax({
 
 
   }})}
+
+
+function kippsButton() {
+  window.open("https://github.com/kcavner", "_blank");
+}
+function jonsButton() {
+  window.open("https://github.com/jonathanguhl", "_blank");
+}
+function casensButton() {
+  window.open("https://github.com/casensutherland", "_blank");
+}
+function jacobsButton() {
+  window.open("https://github.com/jboyce313", "_blank");
+}
+function startGame() {
+  window.location.href = "./score-guesser.html";
+}
 
