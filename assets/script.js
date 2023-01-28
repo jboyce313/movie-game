@@ -1,6 +1,6 @@
 var submitBtn = $("#submit");
 var guessInput = $("#guess-input");
-var movieImage = $("#movie-image");
+var movieImage = $("#moviePoster");
 var score = 0;
 var rottenTomatoesScore;
 
