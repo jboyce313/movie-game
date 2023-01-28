@@ -3,6 +3,8 @@ var guessInput = $("#guess-input");
 var movieImage = $("#moviePoster");
 var score = 0;
 var rottenTomatoesScore;
+var wikiFilms = []
+var wikiLink = ""
 
 var movies = [
   "tt0099700", // gremlins 2
@@ -181,11 +183,21 @@ function call(dataTitle) {
     url:
       "https://en.wikipedia.org/w/api.php?action=opensearch&search=" +
       dataTitle +
-      "&limit=10&namespace=0&format=json&origin=*",
+      "&limit=5&namespace=0&format=json&origin=*",
     success: function (result) {
       var wikiData = result;
       console.log(wikiData);
       console.log(dataTitle);
+      $.each(result[3], function(property, i){
+        if(i.indexOf("film")>-1){
+          console.log(property + " contains the word 'film'")
+          wikiFilms.push(i)
+          var wikiLink = wikiFilms[0]
+        }
+        else{
+          var wikiLink = result[3][0]
+        }
+      })
     },
   });
 }
