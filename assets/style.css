@@ -7,7 +7,7 @@
 
   }
 
-body {
+html {
     background-image: url("../Background_image.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -42,3 +42,4 @@ h1 {
     box-shadow: black -2px 2px, white -4px 4px, white -6px 6px, white -8px 8px, black -10px 10px;
     background-color: rgb(33, 32, 32)
 }
+
