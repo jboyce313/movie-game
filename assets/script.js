@@ -113,6 +113,111 @@ var movies = [
   "tt0449010", // eragon
   "tt0096895", // batman (1989)
   "tt0107688", // nightmare before christmas
+  "tt0456554", // Grandma's Boy
+  "tt0910936", // Pineapple Express 
+  "tt0118708", // Beverly Hills Ninja
+  "tt0088000", // Revenge of the Nerds 
+  "tt2724064", // Sharknado
+  "tt0170016", // The Grinch
+  "tt0099785", // Home Alone 
+  "tt0093894", // The Running Man 
+  "tt11790780", // The Alpinist
+  "tt0278488", // How High 
+  "tt0118571", // Air Force One 
+  "tt0367085", // Soul Plane
+  "tt0372588", // Team America: World Police
+  "tt0364725", // Dodgeball
+  "tt0425112", // Hot Fuzz 
+  "tt7126948", // Wonder Woman 1984
+  "tt0259484", // Paid in Full
+  "tt10665338", // Halloween Kills 
+  "tt0185431", // Little Nicky
+  "tt0116996", // Mars Attacks!
+  "tt0090728", // Big Trouble in Little China 
+  "tt0032138", // The Wizard of Oz
+  "tt1234548", // The Men Who Stare at Goats
+  "tt0427152", // Dinner for Schmucks
+  "tt0242423", // Dude, Where's My Car?
+  "tt0486551", // Beerfest
+  "tt0247745", // Super Troopers
+  "tt0116126", // Dont Be A Menace To South Central While Drinking Your Juice In The Hood 
+  "tt0424774", // Sharkboy and Lavagirl
+  "tt0307987", // Bad Santa
+  "tt0293662", // The Transporter
+  "tt0110443", // Major Payne
+  "tt0328099", // Malibu's Most Wanted
+  "tt0232500", // The Fast and The Furious 
+  "tt0092675", // Bloodsport 
+  "tt7888964", // Nobody
+  "tt0267804", // The One
+  "tt0317248", // City of God
+  "tt0118615", // Anaconda
+  "tt0117998", // Twister
+  "tt0278295", // All About the Benjamins
+  "tt0381707", // White Chicks
+  "tt1130884", // Shutter Island
+  "tt2004420", // Neighbors
+  "tt8115900", // The Bad Guys
+  "tt0250310", // Corky Romano
+  "tt5108870", // Morbius
+  "tt14079374", // 14 Peaks
+  "tt7775622", // Free Solo
+  "tt0398165", // The Longest Yard
+  "tt0387564", // Saw
+  "tt1853728", // Django Unchained
+  "tt0351977", // Walking Tall
+  "tt0107362", // Last Action Hero
+  "tt0317303", // Daddy Day Care
+  "tt6710474", // Everything Everywhere All At Once
+  "tt0477348", // No Country For Old Men
+  "tt0120815", // Saving Private Ryan
+  "tt0286106", // Signs
+  "tt0402022", // Aeon Flux
+  "tt11138512", // The Northman
+  "tt0115697", // Black Sheep
+  "tt1790886", // The Campaign
+  "tt0369339", // Collateral
+  "tt0271367", // Eight Legged Freaks
+  "tt0208092", // Snatch
+  "tt0401792", // Sin City
+  "tt0106965", // Free Willy
+  "tt1220719", // IP Man
+  "tt0210945", // Remember the Titans
+  "tt7286456", // Joker
+  "tt0111161", // The Shawshank Redemption
+  "tt9764362", // The Menu
+  "tt1231587", // Hot Tub Time Machine
+  "tt1226229", // Get Him to the Greek
+  "tt1160419", // Dune
+  "tt0374900", // Napoleon Dynamite
+  "tt0110357", // The Lion King
+  "tt1408253", // Ride Along
+  "tt0107977", // Robin Hood Men in Tights
+  "tt0365830", // Tenacious D in the Pick of Destiny
+  "tt0116756", // Kazaam
+  "tt0119215", // Good Burger
+  "tt0120207", // Steel
+  "tt1010048", // Slumdog Millionaire
+  "tt1375666", // Inception
+  "tt0111257", // Speed
+  "tt0113497", // Jumanji
+  "tt0120689", // The Green Mile
+  "tt2488496", // Star Wars: The Force Awakens
+  "tt0120669", // Fear and Loathing in Las Vegas
+  "tt0113419", // The Indian in the Cupboard
+  "tt0120382", // The Truman Show
+  "tt0115798", // The Cable Guy
+  "tt0112508", // Billy Madison
+  "tt0109686", // Dumb and Dumber
+  "tt0120201", // StarShip Troopers
+  "tt4154756", // Avengers Infinity War
+  "tt6723592", // Tenet
+  "tt2084970", // The Imitation Game
+  "tt1649418", // The Gray man
+  "tt1457767", // The Conjuring
+  "tt0407304", // War of the Worlds
+  ""
+
 ];
 
 var index = generateIndex();
