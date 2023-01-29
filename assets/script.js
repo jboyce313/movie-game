@@ -1,6 +1,8 @@
-var submitBtn = $("#submit");
-var guessInput = $("#guess-input");
+var submitBtn = $(".submit");
+var guessInput = $(".input");
 var movieImage = $("#moviePoster");
+var movieTitle = $(".movie-title");
+var scoreEl = $("#score");
 var score = 0;
 var rottenTomatoesScore;
 var wikiFilms = [];
@@ -42,7 +44,6 @@ var movies = [
   "tt1270797", // venom
   "tt0787475", // hot rod
   "tt1485796", // the greatest showman
-  "tt0096542", // baywatch
   "tt0388419", // christmas with the kranks
   "tt0454945", // she's the man
   "tt0113497", // jumanji
@@ -232,6 +233,7 @@ function loadMovie(movieID) {
     .then((data) => {
       console.log(data);
       movieImage.attr("src", data.Poster);
+      movieTitle.text(data.Title + ` (${data.Year})`);
       rottenTomatoesScore = parseInt(data.Ratings[1].Value);
       var dataTitle = data.Title.replace(/ /g, "%20");
       console.log(dataTitle);
@@ -263,6 +265,7 @@ submitBtn.click(function () {
   console.log(`Points awarded: ${pointsAwarded}`);
 
   score += pointsAwarded;
+  scoreEl.text(`Score: ${score}`);
   console.log(`Score: ${score}`);
 
   movies.splice(index, 1);
