@@ -226,7 +226,7 @@ var index = generateIndex();
 loadMovie(movies[index]);
 
 function loadMovie(movieID) {
-  if (movies.length === 0 || round > 3) {
+  if (movies.length === 0 || round > 10) {
     $(".score-screen").addClass("is-active");
     $(".final-score").text(`Final Score: ${score}`);
     return;
@@ -265,7 +265,7 @@ submitBtn.click(function () {
   console.log(`Guess: ${guess}`);
   console.log(`RT score: ${rottenTomatoesScore}`);
 
-  var difference = rottenTomatoesScore - guess;
+  var difference = Math.abs(rottenTomatoesScore - guess);
   console.log(`Difference: ${difference}`);
 
   var pointsAwarded = 100 - difference;
@@ -276,6 +276,11 @@ submitBtn.click(function () {
   console.log(`Score: ${score}`);
 
   movies.splice(index, 1);
+
+  $(".round-result").addClass("is-active");
+  $(".actual-score").text(`Rotten Tomatoes Score: ${rottenTomatoesScore}`);
+  $(".difference").text(`You were off by: ${difference}`);
+  $(".points-awarded").text(`Points for this round: ${pointsAwarded}`);
 
   index = generateIndex();
   loadMovie(movies[index]);
@@ -335,4 +340,8 @@ invalidModalClose.click(function () {
 
 $(".play-again").click(function () {
   location.reload();
+});
+
+$(".next-round").click(function () {
+  $(".round-result").removeClass("is-active");
 });
