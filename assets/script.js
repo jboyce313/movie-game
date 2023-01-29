@@ -3,8 +3,8 @@ var guessInput = $("#guess-input");
 var movieImage = $("#moviePoster");
 var score = 0;
 var rottenTomatoesScore;
-var wikiFilms = []
-var wikiLink = ""
+var wikiFilms = [];
+var wikiLink = "";
 
 var movies = [
   "tt0099700", // gremlins 2
@@ -31,7 +31,6 @@ var movies = [
   "tt0093748", // plains, trains, and automobiles
   "tt0441773", // kung fu panda
   "tt0240468", // kun pow: enter the fist
-  "tt6710474", // everything everywhere all at once
   "tt0800369", // thor
   "tt4633694", // into the spider-verse
   "tt0086250", // scarface
@@ -88,7 +87,6 @@ var movies = [
   "tt0163651", // american pie
   "tt0277371", // not another teen movie
   "tt0445934", // blades of glory
-  "tt0374900", // napolean dynamite
   "tt0114709", // toy story
   "tt0949731", // the happening
   "tt2911666", // john wick
@@ -116,40 +114,40 @@ var movies = [
   "tt0096895", // batman (1989)
   "tt0107688", // nightmare before christmas
   "tt0456554", // Grandma's Boy
-  "tt0910936", // Pineapple Express 
+  "tt0910936", // Pineapple Express
   "tt0118708", // Beverly Hills Ninja
-  "tt0088000", // Revenge of the Nerds 
+  "tt0088000", // Revenge of the Nerds
   "tt2724064", // Sharknado
   "tt0170016", // The Grinch
-  "tt0099785", // Home Alone 
-  "tt0093894", // The Running Man 
+  "tt0099785", // Home Alone
+  "tt0093894", // The Running Man
   "tt11790780", // The Alpinist
-  "tt0278488", // How High 
-  "tt0118571", // Air Force One 
+  "tt0278488", // How High
+  "tt0118571", // Air Force One
   "tt0367085", // Soul Plane
   "tt0372588", // Team America: World Police
   "tt0364725", // Dodgeball
-  "tt0425112", // Hot Fuzz 
+  "tt0425112", // Hot Fuzz
   "tt7126948", // Wonder Woman 1984
   "tt0259484", // Paid in Full
-  "tt10665338", // Halloween Kills 
+  "tt10665338", // Halloween Kills
   "tt0185431", // Little Nicky
   "tt0116996", // Mars Attacks!
-  "tt0090728", // Big Trouble in Little China 
+  "tt0090728", // Big Trouble in Little China
   "tt0032138", // The Wizard of Oz
   "tt1234548", // The Men Who Stare at Goats
   "tt0427152", // Dinner for Schmucks
   "tt0242423", // Dude, Where's My Car?
   "tt0486551", // Beerfest
   "tt0247745", // Super Troopers
-  "tt0116126", // Dont Be A Menace To South Central While Drinking Your Juice In The Hood 
+  "tt0116126", // Dont Be A Menace To South Central While Drinking Your Juice In The Hood
   "tt0424774", // Sharkboy and Lavagirl
   "tt0307987", // Bad Santa
   "tt0293662", // The Transporter
   "tt0110443", // Major Payne
   "tt0328099", // Malibu's Most Wanted
-  "tt0232500", // The Fast and The Furious 
-  "tt0092675", // Bloodsport 
+  "tt0232500", // The Fast and The Furious
+  "tt0092675", // Bloodsport
   "tt7888964", // Nobody
   "tt0267804", // The One
   "tt0317248", // City of God
@@ -218,8 +216,7 @@ var movies = [
   "tt1649418", // The Gray man
   "tt1457767", // The Conjuring
   "tt0407304", // War of the Worlds
-  ""
-
+  "",
 ];
 
 var index = generateIndex();
@@ -293,16 +290,15 @@ function call(dataTitle) {
       var wikiData = result;
       console.log(wikiData);
       console.log(dataTitle);
-      $.each(result[3], function(property, i){
-        if(i.indexOf("film")>-1){
-          console.log(property + " contains the word 'film'")
-          wikiFilms.push(i)
-          var wikiLink = wikiFilms[0]
+      $.each(result[3], function (property, i) {
+        if (i.indexOf("film") > -1) {
+          console.log(property + " contains the word 'film'");
+          wikiFilms.push(i);
+          var wikiLink = wikiFilms[0];
+        } else {
+          var wikiLink = result[3][0];
         }
-        else{
-          var wikiLink = result[3][0]
-        }
-      })
+      });
     },
   });
 }
