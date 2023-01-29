@@ -3,6 +3,7 @@ var guessInput = $(".input");
 var movieImage = $("#moviePoster");
 var movieTitle = $(".movie-title");
 var scoreEl = $("#score");
+var modalClose = $(".modal-close");
 var score = 0;
 var rottenTomatoesScore;
 var wikiFilms = [];
@@ -251,7 +252,8 @@ submitBtn.click(function () {
 
   if (!validGuess) {
     // change to modal
-    alert("invalid guess");
+    $(".invalid-entry").addClass("is-active");
+    guessInput.val("");
     return;
   }
 
@@ -321,3 +323,7 @@ function jacobsButton() {
 function startGame() {
   window.location.href = "./score-guesser.html";
 }
+
+modalClose.click(function () {
+  $(".modal").removeClass("is-active");
+});
