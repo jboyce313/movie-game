@@ -39,6 +39,8 @@ button {
   background-color: rgb(33, 32, 32);
 }
 
+
+
 .content,
 #score {
   color: white;
@@ -51,7 +53,7 @@ button {
 }
 
 .game-card {
-  max-width: 475px;
+  max-width: 450px;
 }
 
 .modal-content div {

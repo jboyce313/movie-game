@@ -236,7 +236,7 @@ function loadMovie(movieID) {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      movieImage.attr("src", data.Poster);
+      movieImage.attr("src", data.Poster );
       movieTitle.text(data.Title + ` (${data.Year})`);
       rottenTomatoesScore = parseInt(data.Ratings[1].Value);
       var dataTitle = data.Title.replace(/ /g, "%20");
