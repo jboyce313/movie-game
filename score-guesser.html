@@ -4,10 +4,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Margarine&display=swap" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Margarine&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="assets/scoreguesser.css" />
     <title>Movie Game</title>
   </head>
@@ -16,28 +22,79 @@
       <div class="card-image">
         <div id="score">Score:</div>
         <figure class="image is-4by3">
-          <img id="moviePoster" src="https://via.placeholder.com/800x600.png?text=Placeholder+Image" alt="Placeholder Image">
+          <img
+            id="moviePoster"
+            src="https://via.placeholder.com/800x600.png?text=Placeholder+Image"
+            alt="Placeholder Image"
+          />
         </figure>
       </div>
       <div class="card-content">
         <div class="content">
-          Back To The Future 2 (1983)
-          <br>
-          <br>
-            <div class="columns is-gapless">
-              <div class="column">
-                <input class="input is-success is-half" type="text" placeholder="Guess the review score">
-              </div>
-              <div class="row has-text-left">
-                <button class="button is-outlined is-success">Submit</button>
-                <button class="button is-outlined is-info">More Info</button>
-              </div>
+          <span class="movie-title"></span>
+          <br />
+          <br />
+          <div class="columns is-gapless">
+            <div class="column">
+              <input
+                class="input is-success is-half"
+                type="text"
+                placeholder="Guess the review score"
+              />
             </div>
+            <div class="row has-text-left">
+              <button class="button is-outlined is-success submit">
+                Submit
+              </button>
+              <button class="button is-outlined is-info">More Info</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <body>
-    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <div class="modal invalid-entry">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <div>
+          <h3>Please enter valid percentage</h3>
+        </div>
+      </div>
+      <button
+        class="modal-close is-large invalid-modal-button"
+        aria-label="close"
+      ></button>
+    </div>
+    <div class="modal score-screen">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <div>
+          <h3>Game Over</h3>
+          <h4 class="final-score"></h4>
+          <button class="play-again">Play Again</button>
+        </div>
+      </div>
+      <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+    <div class="modal round-result">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <div>
+          <h3 class="actual-score"></h3>
+          <h3 class="difference"></h3>
+          <h3 class="points-awarded"></h3>
+          <button class="next-round">Next Round</button>
+        </div>
+      </div>
+      <button
+        class="modal-close is-large next-round"
+        aria-label="close"
+      ></button>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.js"
+      integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+      crossorigin="anonymous"
+    ></script>
     <script src="./assets/script.js"></script>
   </body>
 </html>
