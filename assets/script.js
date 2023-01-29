@@ -3,8 +3,9 @@ var guessInput = $(".input");
 var movieImage = $("#moviePoster");
 var movieTitle = $(".movie-title");
 var scoreEl = $("#score");
-var modalClose = $(".modal-close");
+var invalidModalClose = $(".invalid-modal-button");
 var score = 0;
+var round = 1;
 var rottenTomatoesScore;
 var wikiFilms = [];
 var wikiLink = "";
@@ -225,7 +226,9 @@ var index = generateIndex();
 loadMovie(movies[index]);
 
 function loadMovie(movieID) {
-  if (movies.length === 0) {
+  if (movies.length === 0 || round > 3) {
+    $(".score-screen").addClass("is-active");
+    $(".final-score").text(`Final Score: ${score}`);
     return;
   }
 
@@ -256,6 +259,8 @@ submitBtn.click(function () {
     guessInput.val("");
     return;
   }
+
+  round++;
 
   console.log(`Guess: ${guess}`);
   console.log(`RT score: ${rottenTomatoesScore}`);
@@ -324,6 +329,10 @@ function startGame() {
   window.location.href = "./score-guesser.html";
 }
 
-modalClose.click(function () {
-  $(".modal").removeClass("is-active");
+invalidModalClose.click(function () {
+  $(".invalid-entry").removeClass("is-active");
+});
+
+$(".play-again").click(function () {
+  location.reload();
 });
