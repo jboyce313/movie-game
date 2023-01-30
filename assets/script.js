@@ -311,7 +311,6 @@ function checkGuess(guess) {
 }
 
 function call(dataTitle) {
-  console.log(dataYear)
   $.ajax({
     url:
       "https://en.wikipedia.org/w/api.php?action=opensearch&search=" +
