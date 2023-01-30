@@ -9,7 +9,15 @@ var round = 1;
 var rottenTomatoesScore;
 var wikiFilms = [];
 var wikiLink = "";
-
+var wikiEntry = "";
+var results = [];
+var trace1 = {
+  x: [],
+  y: [],
+  type: 'scatter'
+};
+var counter = 1
+var scorePLot = document.getElementById("scorePlot")
 var movies = [
   "tt0099700", // gremlins 2
   "tt0133093", // the matrix
@@ -53,7 +61,6 @@ var movies = [
   "tt0247638", // the princess diaries
   "tt0243655", // wet hot american summer
   "tt0120591", // armageddon
-  "tt3704428", // elvis
   "tt0092099", // top gun
   "tt0286112", // shaolin soccer
   "tt0380510", // the lovely bones
@@ -112,7 +119,6 @@ var movies = [
   "tt4975722", // moonlight
   "tt0089927", // rocky 4
   "tt0086960", // beverly hills cop
-  "tt2543164", // arrival
   "tt0449010", // eragon
   "tt0096895", // batman (1989)
   "tt0107688", // nightmare before christmas
@@ -178,7 +184,6 @@ var movies = [
   "tt0402022", // Aeon Flux
   "tt11138512", // The Northman
   "tt0115697", // Black Sheep
-  "tt1790886", // The Campaign
   "tt0369339", // Collateral
   "tt0271367", // Eight Legged Freaks
   "tt0208092", // Snatch
@@ -226,10 +231,14 @@ var index = generateIndex();
 loadMovie(movies[index]);
 
 function loadMovie(movieID) {
-  if (movies.length === 0 || round > 10) {
+  if (movies.length === 0 || round > 5) {
+    Plotly.newPlot(scorePLot, [trace1]);
+    console.log(trace1)
     $(".score-screen").addClass("is-active");
     $(".final-score").text(`Final Score: ${score}`);
+    
     return;
+   
   }
 
   fetch(`http://www.omdbapi.com/?i=${movieID}&apikey=efb9b6cf`)
@@ -240,8 +249,8 @@ function loadMovie(movieID) {
       movieTitle.text(data.Title + ` (${data.Year})`);
       rottenTomatoesScore = parseInt(data.Ratings[1].Value);
       var dataTitle = data.Title.replace(/ /g, "%20");
-      console.log(dataTitle);
       call(dataTitle);
+      
     });
 }
 
@@ -270,6 +279,9 @@ submitBtn.click(function () {
 
   var pointsAwarded = 100 - difference;
   console.log(`Points awarded: ${pointsAwarded}`);
+  trace1.y.push(pointsAwarded)
+  trace1.x.push(counter)
+  counter++
 
   score += pointsAwarded;
   scoreEl.text(`Score: ${score}`);
@@ -287,6 +299,8 @@ submitBtn.click(function () {
   guessInput.val("");
 });
 
+
+
 function checkGuess(guess) {
   if ($.isNumeric(guess) && guess >= 0 && guess <= 100) {
     return true;
@@ -300,22 +314,42 @@ function call(dataTitle) {
     url:
       "https://en.wikipedia.org/w/api.php?action=opensearch&search=" +
       dataTitle +
-      "&limit=5&namespace=0&format=json&origin=*",
+      "&limit=10&namespace=0&format=json&origin=*",
     success: function (result) {
       var wikiData = result;
-      console.log(wikiData);
-      console.log(dataTitle);
+      console.log(wikiData)
       $.each(result[3], function (property, i) {
         if (i.indexOf("film") > -1) {
           console.log(property + " contains the word 'film'");
           wikiFilms.push(i);
           var wikiLink = wikiFilms[0];
-        } else {
-          var wikiLink = result[3][0];
-        }
+          wikiAppend(wikiLink)
+          return
+        } 
+
       });
+      var wikiLink = result[3][0]
+      wikiAppend(wikiLink)
+      
     },
   });
+}
+
+function wikiAppend(wikiLink){
+  // grabs the wikipedia link and parses out the title of the page so it can be sent to the api as a variable
+  var articleName = wikiLink.slice(wikiLink.lastIndexOf("/") + 1);
+  $.ajax({
+    url:"https://en.wikipedia.org/api/rest_v1/page/summary/" + articleName,
+    success:function (result){
+      results.length = 0
+      // push responses to an array to avoid disambiguation entrys
+      results.push(result)
+      // parses out the paragraph 
+      var wikiEntry = results[0].extract;
+      console.log(result)
+      $('.wikiParagraph').text(wikiEntry)
+    }
+  })
 }
 
 function kippsButton() {
