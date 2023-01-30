@@ -9,6 +9,9 @@ var round = 1;
 var rottenTomatoesScore;
 var wikiFilms = [];
 var wikiLink = "";
+var wikiEntry = ""
+var results = [];
+
 
 var movies = [
   "tt0099700", // gremlins 2
@@ -240,8 +243,9 @@ function loadMovie(movieID) {
       movieTitle.text(data.Title + ` (${data.Year})`);
       rottenTomatoesScore = parseInt(data.Ratings[1].Value);
       var dataTitle = data.Title.replace(/ /g, "%20");
-      console.log(dataTitle);
-      call(dataTitle);
+      var dataYear = data.Year
+      console.log(dataYear)
+      call(dataTitle,dataYear);
     });
 }
 
@@ -295,27 +299,51 @@ function checkGuess(guess) {
   }
 }
 
-function call(dataTitle) {
+function call(dataTitle, dataYear) {
+  console.log(dataYear)
+  var wikiUrl = "https://en.wikipedia.org/w/api.php?action=opensearch&search=" +
+  dataTitle +"%20film"+
+  "&limit=5&namespace=0&format=json&origin=*"
   $.ajax({
     url:
       "https://en.wikipedia.org/w/api.php?action=opensearch&search=" +
       dataTitle +
-      "&limit=5&namespace=0&format=json&origin=*",
+      "&limit=10&namespace=0&format=json&origin=*",
     success: function (result) {
       var wikiData = result;
-      console.log(wikiData);
-      console.log(dataTitle);
+      console.log(wikiData)
       $.each(result[3], function (property, i) {
         if (i.indexOf("film") > -1) {
           console.log(property + " contains the word 'film'");
           wikiFilms.push(i);
           var wikiLink = wikiFilms[0];
-        } else {
-          var wikiLink = result[3][0];
-        }
+          wikiAppend(wikiLink)
+          return
+        } 
+
       });
+      var wikiLink = result[3][0]
+      wikiAppend(wikiLink)
+      
     },
   });
+}
+
+function wikiAppend(wikiLink){
+  // grabs the wikipedia link and parses out the title of the page so it can be sent to the api as a variable
+  var articleName = wikiLink.slice(wikiLink.lastIndexOf("/") + 1);
+  $.ajax({
+    url:"https://en.wikipedia.org/api/rest_v1/page/summary/" + articleName,
+    success:function (result){
+      // push responses to an array to avoid disambiguation entrys
+      results.push(result)
+      // parses out the paragraph 
+      var wikiEntry = results[0].extract;
+      console.log(result)
+      // console.log(wikiEntry)
+      $('.wikiParagraph').text(wikiEntry)
+    }
+  })
 }
 
 function kippsButton() {
