@@ -246,7 +246,8 @@ function loadMovie(movieID) {
   fetch(`http://www.omdbapi.com/?i=${movieID}&apikey=efb9b6cf`)
     .then((response) => response.json())
     .then((data) => {
-      movieImage.attr("src", data.Poster);
+      console.log(data);
+      movieImage.attr("src", data.Poster );
       movieTitle.text(data.Title + ` (${data.Year})`);
       rottenTomatoesScore = parseInt(data.Ratings[1].Value);
       var dataTitle = data.Title.replace(/ /g, "%20");
