@@ -9,10 +9,15 @@ var round = 1;
 var rottenTomatoesScore;
 var wikiFilms = [];
 var wikiLink = "";
-var wikiEntry = ""
+var wikiEntry = "";
 var results = [];
-
-
+var trace1 = {
+  x: [],
+  y: [],
+  type: 'scatter'
+};
+var counter = 1
+var scorePLot = document.getElementById("scorePlot")
 var movies = [
   "tt0099700", // gremlins 2
   "tt0133093", // the matrix
@@ -181,7 +186,6 @@ var movies = [
   "tt0402022", // Aeon Flux
   "tt11138512", // The Northman
   "tt0115697", // Black Sheep
-  "tt1790886", // The Campaign
   "tt0369339", // Collateral
   "tt0271367", // Eight Legged Freaks
   "tt0208092", // Snatch
@@ -229,23 +233,25 @@ var index = generateIndex();
 loadMovie(movies[index]);
 
 function loadMovie(movieID) {
-  if (movies.length === 0 || round > 10) {
+  if (movies.length === 0 || round > 5) {
+    Plotly.newPlot(scorePLot, [trace1]);
+    console.log(trace1)
     $(".score-screen").addClass("is-active");
     $(".final-score").text(`Final Score: ${score}`);
+    
     return;
+   
   }
 
   fetch(`http://www.omdbapi.com/?i=${movieID}&apikey=efb9b6cf`)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       movieImage.attr("src", data.Poster);
       movieTitle.text(data.Title + ` (${data.Year})`);
       rottenTomatoesScore = parseInt(data.Ratings[1].Value);
       var dataTitle = data.Title.replace(/ /g, "%20");
-      var dataYear = data.Year
-      console.log(dataYear)
-      call(dataTitle,dataYear);
+      call(dataTitle);
+      
     });
 }
 
@@ -274,6 +280,9 @@ submitBtn.click(function () {
 
   var pointsAwarded = 100 - difference;
   console.log(`Points awarded: ${pointsAwarded}`);
+  trace1.y.push(pointsAwarded)
+  trace1.x.push(counter)
+  counter++
 
   score += pointsAwarded;
   scoreEl.text(`Score: ${score}`);
@@ -291,6 +300,8 @@ submitBtn.click(function () {
   guessInput.val("");
 });
 
+
+
 function checkGuess(guess) {
   if ($.isNumeric(guess) && guess >= 0 && guess <= 100) {
     return true;
@@ -299,11 +310,8 @@ function checkGuess(guess) {
   }
 }
 
-function call(dataTitle, dataYear) {
+function call(dataTitle) {
   console.log(dataYear)
-  var wikiUrl = "https://en.wikipedia.org/w/api.php?action=opensearch&search=" +
-  dataTitle +"%20film"+
-  "&limit=5&namespace=0&format=json&origin=*"
   $.ajax({
     url:
       "https://en.wikipedia.org/w/api.php?action=opensearch&search=" +
@@ -335,12 +343,12 @@ function wikiAppend(wikiLink){
   $.ajax({
     url:"https://en.wikipedia.org/api/rest_v1/page/summary/" + articleName,
     success:function (result){
+      results.length = 0
       // push responses to an array to avoid disambiguation entrys
       results.push(result)
       // parses out the paragraph 
       var wikiEntry = results[0].extract;
       console.log(result)
-      // console.log(wikiEntry)
       $('.wikiParagraph').text(wikiEntry)
     }
   })
