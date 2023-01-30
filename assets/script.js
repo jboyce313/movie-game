@@ -61,7 +61,6 @@ var movies = [
   "tt0247638", // the princess diaries
   "tt0243655", // wet hot american summer
   "tt0120591", // armageddon
-  "tt3704428", // elvis
   "tt0092099", // top gun
   "tt0286112", // shaolin soccer
   "tt0380510", // the lovely bones
@@ -120,7 +119,6 @@ var movies = [
   "tt4975722", // moonlight
   "tt0089927", // rocky 4
   "tt0086960", // beverly hills cop
-  "tt2543164", // arrival
   "tt0449010", // eragon
   "tt0096895", // batman (1989)
   "tt0107688", // nightmare before christmas
