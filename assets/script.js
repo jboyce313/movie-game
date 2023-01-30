@@ -8,7 +8,7 @@ var score = 0;
 var round = 1;
 var rottenTomatoesScore;
 var wikiFilms = [];
-var wikiLink = "";
+var wikiLink = [];
 var wikiEntry = "";
 var results = [];
 var trace1 = {
@@ -233,7 +233,6 @@ loadMovie(movies[index]);
 function loadMovie(movieID) {
   if (movies.length === 0 || round > 5) {
     Plotly.newPlot(scorePLot, [trace1]);
-    console.log(trace1)
     $(".score-screen").addClass("is-active");
     $(".final-score").text(`Final Score: ${score}`);
     
@@ -315,33 +314,40 @@ function call(dataTitle) {
       "https://en.wikipedia.org/w/api.php?action=opensearch&search=" +
       dataTitle +
       "&limit=10&namespace=0&format=json&origin=*",
-    success: function (result) {
-      var wikiData = result;
-      console.log(wikiData)
-      $.each(result[3], function (property, i) {
-        if (i.indexOf("film") > -1) {
-          console.log(property + " contains the word 'film'");
-          wikiFilms.push(i);
-          var wikiLink = wikiFilms[0];
-          wikiAppend(wikiLink)
-          return
-        } 
+    success: function (wikiResult) {
+      
 
-      });
-      var wikiLink = result[3][0]
-      wikiAppend(wikiLink)
+      return wikiLoop(wikiResult);
+      
       
     },
   });
 }
+function wikiLoop(wikiResult){
+  console.log(wikiResult)
+let wikiLink = []
+var wikiIndex = wikiResult[3]
+for(i=0;i<wikiIndex.length;i++){
+  if(wikiIndex[i].indexOf("film") > -1){
+    wikiLink.push(wikiIndex[i])
+    return wikiAppend(wikiLink[0])
+  }
+}
+
+console.log(wikiIndex[0])
+return wikiAppend(wikiIndex[0])
+}
+
 
 function wikiAppend(wikiLink){
   // grabs the wikipedia link and parses out the title of the page so it can be sent to the api as a variable
+  console.log(wikiLink)
   var articleName = wikiLink.slice(wikiLink.lastIndexOf("/") + 1);
+  console.log(articleName)
   $.ajax({
     url:"https://en.wikipedia.org/api/rest_v1/page/summary/" + articleName,
     success:function (result){
-      results.length = 0
+      results = []
       // push responses to an array to avoid disambiguation entrys
       results.push(result)
       // parses out the paragraph 
