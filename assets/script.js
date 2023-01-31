@@ -1,8 +1,28 @@
-var submitBtn = $(".submit");
-var guessInput = $(".input");
-var movieImage = $("#moviePoster");
+// Bulma slider function
+function findOutputForSlider(el) {
+  var idVal = el.id;
+  outputs = document.getElementsByTagName("output");
+  for (var i = 0; i < outputs.length; i++) {
+    if (outputs[i].htmlFor == idVal) return outputs[i];
+  }
+}
+// Bulma slider function
+var sliders = document.querySelectorAll('input[type="range"].slider');
+[].forEach.call(sliders, function (slider) {
+  var output = findOutputForSlider(slider);
+  if (output) {
+    slider.addEventListener("input", function (event) {
+      output.value = event.target.value;
+    });
+  }
+});
+
+var submitBtn = $(".submit-btn");
+var guessInput = $(".guess");
+var movieImage = $(".movie-poster");
 var movieTitle = $(".movie-title");
-var scoreEl = $("#score");
+var movieTitleText;
+var scoreEl = $(".current-score");
 var invalidModalClose = $(".invalid-modal-button");
 var score = 0;
 var round = 1;
@@ -14,10 +34,10 @@ var results = [];
 var trace1 = {
   x: [],
   y: [],
-  type: 'scatter'
+  type: "scatter",
 };
-var counter = 1
-var scorePLot = document.getElementById("scorePlot")
+var counter = 1;
+var scorePLot = document.getElementById("scorePlot");
 var movies = [
   "tt0099700", // gremlins 2
   "tt0133093", // the matrix
@@ -71,7 +91,6 @@ var movies = [
   "tt2527338", // the rise of skywalker
   "tt0076759", // star wars
   "tt1160419", // dune
-  "tt0145487", // spider-man
   "tt0111257", // speed
   "tt0118880", // con air
   "tt0118571", // air force one
@@ -150,7 +169,6 @@ var movies = [
   "tt0486551", // Beerfest
   "tt0247745", // Super Troopers
   "tt0116126", // Dont Be A Menace To South Central While Drinking Your Juice In The Hood
-  "tt0424774", // Sharkboy and Lavagirl
   "tt0307987", // Bad Santa
   "tt0293662", // The Transporter
   "tt0110443", // Major Payne
@@ -224,7 +242,6 @@ var movies = [
   "tt1649418", // The Gray man
   "tt1457767", // The Conjuring
   "tt0407304", // War of the Worlds
-
 ];
 
 var index = generateIndex();
@@ -235,21 +252,19 @@ function loadMovie(movieID) {
     Plotly.newPlot(scorePLot, [trace1]);
     $(".score-screen").addClass("is-active");
     $(".final-score").text(`Final Score: ${score}`);
-    
+
     return;
-   
   }
 
   fetch(`http://www.omdbapi.com/?i=${movieID}&apikey=efb9b6cf`)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
-      movieImage.attr("src", data.Poster );
+      movieImage.attr("src", data.Poster);
+      movieTitleText = data.Title;
       movieTitle.text(data.Title + ` (${data.Year})`);
       rottenTomatoesScore = parseInt(data.Ratings[1].Value);
       var dataTitle = data.Title.replace(/ /g, "%20");
       call(dataTitle);
-      
     });
 }
 
@@ -259,46 +274,36 @@ function generateIndex() {
 
 submitBtn.click(function () {
   var guess = guessInput.val();
-  var validGuess = checkGuess(guess);
+  // var validGuess = checkGuess(guess);
 
-  if (!validGuess) {
-    // change to modal
-    $(".invalid-entry").addClass("is-active");
-    guessInput.val("");
-    return;
-  }
+  // if (!validGuess) {
+  //   // change to modal
+  //   $(".invalid-entry").addClass("is-active");
+  //   guessInput.val("");
+  //   return;
+  // }
 
   round++;
 
-  console.log(`Guess: ${guess}`);
-  console.log(`RT score: ${rottenTomatoesScore}`);
-
   var difference = Math.abs(rottenTomatoesScore - guess);
-  console.log(`Difference: ${difference}`);
 
   var pointsAwarded = 100 - difference;
-  console.log(`Points awarded: ${pointsAwarded}`);
-  trace1.y.push(pointsAwarded)
-  trace1.x.push(counter)
-  counter++
+  trace1.y.push(pointsAwarded);
+  trace1.x.push(counter);
+  counter++;
 
   score += pointsAwarded;
   scoreEl.text(`Score: ${score}`);
-  console.log(`Score: ${score}`);
 
   movies.splice(index, 1);
 
-  $(".round-result").addClass("is-active");
-  $(".actual-score").text(`Rotten Tomatoes Score: ${rottenTomatoesScore}`);
-  $(".difference").text(`You were off by: ${difference}`);
-  $(".points-awarded").text(`Points for this round: ${pointsAwarded}`);
+  $(".previous-score").text(
+    `${movieTitleText}'s RT score: ${rottenTomatoesScore}%  (off by ${difference})`
+  );
 
   index = generateIndex();
   loadMovie(movies[index]);
-  guessInput.val("");
 });
-
-
 
 function checkGuess(guess) {
   if ($.isNumeric(guess) && guess >= 0 && guess <= 100) {
@@ -315,47 +320,37 @@ function call(dataTitle) {
       dataTitle +
       "&limit=10&namespace=0&format=json&origin=*",
     success: function (wikiResult) {
-      
-
       return wikiLoop(wikiResult);
-      
-      
     },
   });
 }
-function wikiLoop(wikiResult){
-  console.log(wikiResult)
-let wikiLink = []
-var wikiIndex = wikiResult[3]
-for(i=0;i<wikiIndex.length;i++){
-  if(wikiIndex[i].indexOf("film") > -1){
-    wikiLink.push(wikiIndex[i])
-    return wikiAppend(wikiLink[0])
-  }
-}
-
-console.log(wikiIndex[0])
-return wikiAppend(wikiIndex[0])
-}
-
-
-function wikiAppend(wikiLink){
-  // grabs the wikipedia link and parses out the title of the page so it can be sent to the api as a variable
-  console.log(wikiLink)
-  var articleName = wikiLink.slice(wikiLink.lastIndexOf("/") + 1);
-  console.log(articleName)
-  $.ajax({
-    url:"https://en.wikipedia.org/api/rest_v1/page/summary/" + articleName,
-    success:function (result){
-      results = []
-      // push responses to an array to avoid disambiguation entrys
-      results.push(result)
-      // parses out the paragraph 
-      var wikiEntry = results[0].extract;
-      console.log(result)
-      $('.wikiParagraph').text(wikiEntry)
+function wikiLoop(wikiResult) {
+  let wikiLink = [];
+  var wikiIndex = wikiResult[3];
+  for (i = 0; i < wikiIndex.length; i++) {
+    if (wikiIndex[i].indexOf("film") > -1) {
+      wikiLink.push(wikiIndex[i]);
+      return wikiAppend(wikiLink[0]);
     }
-  })
+  }
+
+  return wikiAppend(wikiIndex[0]);
+}
+
+function wikiAppend(wikiLink) {
+  // grabs the wikipedia link and parses out the title of the page so it can be sent to the api as a variable
+  var articleName = wikiLink.slice(wikiLink.lastIndexOf("/") + 1);
+  $.ajax({
+    url: "https://en.wikipedia.org/api/rest_v1/page/summary/" + articleName,
+    success: function (result) {
+      results = [];
+      // push responses to an array to avoid disambiguation entrys
+      results.push(result);
+      // parses out the paragraph
+      var wikiEntry = results[0].extract;
+      $(".wikiParagraph").text(wikiEntry);
+    },
+  });
 }
 
 function kippsButton() {
