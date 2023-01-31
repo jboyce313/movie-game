@@ -249,7 +249,7 @@ loadMovie(movies[index]);
 
 function loadMovie(movieID) {
   if (movies.length === 0 || round > 5) {
-    // Plotly.newPlot(scorePLot, [trace1]);
+    Plotly.newPlot(scorePLot, [trace1]);
     $(".score-screen").addClass("is-active");
     $(".final-score").text(`Final Score: ${score}`);
 
@@ -259,7 +259,6 @@ function loadMovie(movieID) {
   fetch(`http://www.omdbapi.com/?i=${movieID}&apikey=efb9b6cf`)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       movieImage.attr("src", data.Poster);
       movieTitleText = data.Title;
       movieTitle.text(data.Title + ` (${data.Year})`);
@@ -275,39 +274,28 @@ function generateIndex() {
 
 submitBtn.click(function () {
   var guess = guessInput.val();
-  var validGuess = checkGuess(guess);
+  // var validGuess = checkGuess(guess);
 
-  if (!validGuess) {
-    // change to modal
-    $(".invalid-entry").addClass("is-active");
-    guessInput.val("");
-    return;
-  }
+  // if (!validGuess) {
+  //   // change to modal
+  //   $(".invalid-entry").addClass("is-active");
+  //   guessInput.val("");
+  //   return;
+  // }
 
   round++;
 
-  console.log(`Guess: ${guess}`);
-  console.log(`RT score: ${rottenTomatoesScore}`);
-
   var difference = Math.abs(rottenTomatoesScore - guess);
-  console.log(`Difference: ${difference}`);
 
   var pointsAwarded = 100 - difference;
-  console.log(`Points awarded: ${pointsAwarded}`);
   trace1.y.push(pointsAwarded);
   trace1.x.push(counter);
   counter++;
 
   score += pointsAwarded;
   scoreEl.text(`Score: ${score}`);
-  console.log(`Score: ${score}`);
 
   movies.splice(index, 1);
-
-  // $(".round-result").addClass("is-active");
-  // $(".actual-score").text(`Rotten Tomatoes Score: ${rottenTomatoesScore}`);
-  // $(".difference").text(`You were off by: ${difference}`);
-  // $(".points-awarded").text(`Points for this round: ${pointsAwarded}`);
 
   $(".previous-score").text(
     `${movieTitleText}'s RT score: ${rottenTomatoesScore}%  (off by ${difference})`
@@ -337,7 +325,6 @@ function call(dataTitle) {
   });
 }
 function wikiLoop(wikiResult) {
-  console.log(wikiResult);
   let wikiLink = [];
   var wikiIndex = wikiResult[3];
   for (i = 0; i < wikiIndex.length; i++) {
@@ -347,15 +334,12 @@ function wikiLoop(wikiResult) {
     }
   }
 
-  console.log(wikiIndex[0]);
   return wikiAppend(wikiIndex[0]);
 }
 
 function wikiAppend(wikiLink) {
   // grabs the wikipedia link and parses out the title of the page so it can be sent to the api as a variable
-  console.log(wikiLink);
   var articleName = wikiLink.slice(wikiLink.lastIndexOf("/") + 1);
-  console.log(articleName);
   $.ajax({
     url: "https://en.wikipedia.org/api/rest_v1/page/summary/" + articleName,
     success: function (result) {
@@ -364,7 +348,6 @@ function wikiAppend(wikiLink) {
       results.push(result);
       // parses out the paragraph
       var wikiEntry = results[0].extract;
-      console.log(result);
       $(".wikiParagraph").text(wikiEntry);
     },
   });
