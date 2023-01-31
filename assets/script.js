@@ -224,7 +224,7 @@ var movies = [
   "tt1649418", // The Gray man
   "tt1457767", // The Conjuring
   "tt0407304", // War of the Worlds
-  "",
+
 ];
 
 var index = generateIndex();
