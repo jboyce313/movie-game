@@ -249,7 +249,7 @@ loadMovie(movies[index]);
 
 function loadMovie(movieID) {
   if (movies.length === 0 || round > 5) {
-    Plotly.newPlot(scorePLot, [trace1]);
+    // Plotly.newPlot(scorePLot, [trace1]);
     $(".score-screen").addClass("is-active");
     $(".final-score").text(`Final Score: ${score}`);
 
