@@ -236,7 +236,7 @@ function loadMovie(movieID) {
     return;
   }
 
-  fetch(`http://www.omdbapi.com/?i=${movieID}&apikey=efb9b6cf`)
+  fetch(`https://www.omdbapi.com/?i=${movieID}&apikey=efb9b6cf`)
     .then((response) => response.json())
     .then((data) => {
       movieImage.attr("src", data.Poster);
