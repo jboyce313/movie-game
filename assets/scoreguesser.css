@@ -4,3 +4,46 @@
   flex-direction: column;
   align-items: center;
 }
+
+html {
+  background-color: rgb(30, 28, 28);
+}
+
+nav span {
+  color:rgb(1, 124, 22);
+  margin-top:10px;
+  font-size:17px;
+}
+
+
+.card-content, .card-footer {
+  background-color: black;
+}
+
+.title {
+  color:white;
+}
+
+.subtitle {
+  color:green;
+}
+span {
+  font-size:15px;
+}
+header {
+  margin-top:10px;
+}
+header nav ul {
+  display: flex;
+  justify-content: center;
+  
+}
+
+header nav li {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.score-screen{
+  margin:30px;
+}

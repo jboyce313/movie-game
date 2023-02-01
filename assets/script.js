@@ -278,7 +278,7 @@ submitBtn.click(function () {
   movies.splice(index, 1);
 
   $(".previous-score").text(
-    `${movieTitleText}'s RT score: ${rottenTomatoesScore}%  (off by ${difference})`
+    `${movieTitleText}'s RT score: ${rottenTomatoesScore}%  (off by ${difference}%)`
   );
 
   index = generateIndex();
