@@ -2,7 +2,7 @@ var submitBtn = $(".submit-btn");
 var guessInput = $(".guess");
 var movieImage = $(".movie-poster");
 var movieTitle = $(".movie-title");
-var wikiHyperLink = $(".wikiHyperLink")
+var wikiHyperLink = $(".wikiHyperLink");
 var movieTitleText;
 var scoreEl = $(".current-score");
 var invalidModalClose = $(".invalid-modal-button");
@@ -10,7 +10,7 @@ var score = 0;
 var round = 1;
 var rottenTomatoesScore;
 var wikiFilms = [];
-var wikiLink = [];
+var wikiLink;
 var wikiEntry = "";
 var results = [];
 var trace1 = {
@@ -254,14 +254,6 @@ function generateIndex() {
 
 submitBtn.click(function () {
   var guess = guessInput.val();
-  // var validGuess = checkGuess(guess);
-
-  // if (!validGuess) {
-  //   // change to modal
-  //   $(".invalid-entry").addClass("is-active");
-  //   guessInput.val("");
-  //   return;
-  // }
 
   round++;
 
@@ -296,36 +288,31 @@ function checkGuess(guess) {
 function call(dataTitle) {
   $.ajax({
     url:
-      "https://en.wikipedia.org/w/api.php?action=opensearch&search=" + dataTitle +
+      "https://en.wikipedia.org/w/api.php?action=opensearch&search=" +
+      dataTitle +
       "&limit=10&namespace=0&format=json&origin=*",
     success: function (wikiResult) {
-      console.log(wikiResult)
+      console.log(wikiResult);
       return wikiLoop(wikiResult);
-
     },
   });
 }
 function wikiLoop(wikiResult) {
-  let wikiLink = [];
   var wikiIndex = wikiResult[3];
   for (i = 0; i < wikiIndex.length; i++) {
     if (wikiIndex[i].indexOf("film") > -1) {
-      wikiLink.push(wikiIndex[i]);
-      return wikiAppend(wikiLink[0]);
+      wikiLink = wikiIndex[i];
+      return wikiAppend(wikiLink);
     }
   }
 
+  wikiLink = wikiIndex[0];
   return wikiAppend(wikiIndex[0]);
 }
 
 function wikiAppend(wikiLink) {
   // grabs the wikipedia link and parses out the title of the page so it can be sent to the api as a variable
 
-  // wikiHyperLink.attr("href", wikiLink);
-  wikiHyperLink.click(function() {
-    window.open(wikiLink, '_blank').focus();
-
-  })
   var articleName = wikiLink.slice(wikiLink.lastIndexOf("/") + 1);
   $.ajax({
     url: "https://en.wikipedia.org/api/rest_v1/page/summary/" + articleName,
@@ -339,6 +326,10 @@ function wikiAppend(wikiLink) {
     },
   });
 }
+
+wikiHyperLink.click(function () {
+  window.open(wikiLink, "_blank").focus();
+});
 
 function kippsButton() {
   window.open("https://github.com/kcavner", "_blank");
@@ -368,10 +359,8 @@ $(".next-round").click(function () {
   $(".round-result").removeClass("is-active");
 });
 
-
-
 function openInNewTab(url) {
-  window.open(url, '_blank').focus();
+  window.open(url, "_blank").focus();
 }
 
 // Bulma slider function
