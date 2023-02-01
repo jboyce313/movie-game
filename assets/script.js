@@ -1,26 +1,8 @@
-// Bulma slider function
-function findOutputForSlider(el) {
-  var idVal = el.id;
-  outputs = document.getElementsByTagName("output");
-  for (var i = 0; i < outputs.length; i++) {
-    if (outputs[i].htmlFor == idVal) return outputs[i];
-  }
-}
-// Bulma slider function
-var sliders = document.querySelectorAll('input[type="range"].slider');
-[].forEach.call(sliders, function (slider) {
-  var output = findOutputForSlider(slider);
-  if (output) {
-    slider.addEventListener("input", function (event) {
-      output.value = event.target.value;
-    });
-  }
-});
-
 var submitBtn = $(".submit-btn");
 var guessInput = $(".guess");
 var movieImage = $(".movie-poster");
 var movieTitle = $(".movie-title");
+var wikiHyperLink = $(".wikiHyperLink")
 var movieTitleText;
 var scoreEl = $(".current-score");
 var invalidModalClose = $(".invalid-modal-button");
@@ -139,7 +121,6 @@ var movies = [
   "tt0089927", // rocky 4
   "tt0086960", // beverly hills cop
   "tt0449010", // eragon
-  "tt0096895", // batman (1989)
   "tt0107688", // nightmare before christmas
   "tt0456554", // Grandma's Boy
   "tt0910936", // Pineapple Express
@@ -170,7 +151,6 @@ var movies = [
   "tt0247745", // Super Troopers
   "tt0116126", // Dont Be A Menace To South Central While Drinking Your Juice In The Hood
   "tt0307987", // Bad Santa
-  "tt0293662", // The Transporter
   "tt0110443", // Major Payne
   "tt0328099", // Malibu's Most Wanted
   "tt0232500", // The Fast and The Furious
@@ -316,11 +296,12 @@ function checkGuess(guess) {
 function call(dataTitle) {
   $.ajax({
     url:
-      "https://en.wikipedia.org/w/api.php?action=opensearch&search=" +
-      dataTitle +
+      "https://en.wikipedia.org/w/api.php?action=opensearch&search=" + dataTitle +
       "&limit=10&namespace=0&format=json&origin=*",
     success: function (wikiResult) {
+      console.log(wikiResult)
       return wikiLoop(wikiResult);
+
     },
   });
 }
@@ -339,6 +320,12 @@ function wikiLoop(wikiResult) {
 
 function wikiAppend(wikiLink) {
   // grabs the wikipedia link and parses out the title of the page so it can be sent to the api as a variable
+
+  // wikiHyperLink.attr("href", wikiLink);
+  wikiHyperLink.click(function() {
+    window.open(wikiLink, '_blank').focus();
+
+  })
   var articleName = wikiLink.slice(wikiLink.lastIndexOf("/") + 1);
   $.ajax({
     url: "https://en.wikipedia.org/api/rest_v1/page/summary/" + articleName,
@@ -379,4 +366,29 @@ $(".play-again").click(function () {
 
 $(".next-round").click(function () {
   $(".round-result").removeClass("is-active");
+});
+
+
+
+function openInNewTab(url) {
+  window.open(url, '_blank').focus();
+}
+
+// Bulma slider function
+function findOutputForSlider(el) {
+  var idVal = el.id;
+  outputs = document.getElementsByTagName("output");
+  for (var i = 0; i < outputs.length; i++) {
+    if (outputs[i].htmlFor == idVal) return outputs[i];
+  }
+}
+// Bulma slider function
+var sliders = document.querySelectorAll('input[type="range"].slider');
+[].forEach.call(sliders, function (slider) {
+  var output = findOutputForSlider(slider);
+  if (output) {
+    slider.addEventListener("input", function (event) {
+      output.value = event.target.value;
+    });
+  }
 });
