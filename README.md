@@ -22,7 +22,7 @@
 
 ## Credits
 - The background image for the landing page was grabbed from www.wallpapers.com 
-- The movie poster and review score were fetched using the OMDB API 
-- The small bit information about the movie was fetched from the Wikipedia API
+- The movie poster and review score were fetched using the OMDB API https://www.omdbapi.com/
+- The small bit information about the movie was fetched from the Wikipedia API https://www.mediawiki.org/wiki/API:Main_page
 
 
